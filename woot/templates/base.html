@@ -1,0 +1,46 @@
+{% load staticfiles %}
+<!doctype html>
+<html {{ html_attr|safe }}>
+	<head>
+		<meta charset='utf-8'>
+		<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+		<title>{% block title %}{% endblock %}</title>
+		<meta name='description' content='{% block description %}{% endblock %}'>
+		<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no'>
+		<link rel='stylesheet' href='{% static "css/bootstrap/3.3.6/bootstrap.css" %}'>
+		<link rel='stylesheet' href='{% static "css/ui.css" %}'>
+	</head>
+	<body {{ body_attr|safe }}>
+		<div id='hook'></div>
+
+		<!-- jQuery -->
+		<script src='{% static "js/jquery/2.2.2/jquery.min.js" %}'></script>
+
+		<!-- Third party (no local deps) -->
+		<script src='{% static "js/util/string-format.js" %}' onload='format.extend(String.prototype);'></script>
+		<script src='{% static "js/util/mousetrap.js" %}'></script> <!-- keyboard shortcuts -->
+		<script src='{% static "js/util/jss.min.js" %}'></script>
+
+		<!-- general utility stuff comes before local -->
+		<script src='{% static "js/util/util.js" %}'></script>
+		<script src='{% static "js/util/mods.js" %}'></script>
+		<script src='{% static "js/util/shortcuts.js" %}'></script>
+		<script src='{% static "js/util/csrf.js" %}'></script>
+
+		<!-- UI -->
+		<script src='{% static "js/ui/ui.js" %}'></script>
+		<script src='{% static "js/ui/color.js" %}'></script>
+		<script src='{% static "js/ui/shortcuts.js" %}'></script>
+		<script src="{% static 'js/ui/request.js' %}"></script>
+
+		<script src='{% static "js/ui/components/components.contentPanel.js" %}'></script>
+		<script src='{% static "js/ui/components/components.search.js" %}'></script>
+		<script src='{% static "js/ui/components/components.searchableList.js" %}'></script>
+		<script src='{% static "js/ui/components/components.text.js" %}'></script>
+		<script src='{% static "js/ui/components/components.button.js" %}'></script>
+		<script src='{% static "js/ui/components/components.timer.js" %}'></script>
+
+		<script src='{% static "js/ui/components/test/components.test.search.js" %}'></script>
+		{% block js %}{% endblock %}
+	</body>
+</html>
