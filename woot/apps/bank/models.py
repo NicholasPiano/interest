@@ -1,9 +1,10 @@
 
 # Django
 from django.db import models
+from django.contrib.auth import get_user_model
 
 # Local
-from apps.bank.models import Model, AccessMixin
+from apps.base.models import Model, AccessMixin
 
 
 # Bank
@@ -30,6 +31,8 @@ class Deposit(Model, AccessMixin):
     start_date = models.DateTimeField(auto_now_add=True)
     end_date = models.DateTimeField(auto_now_add=False, null=True)
 
+    # Methods
+
 
 # Deposit access token
 class DepositAccessToken(Model):
@@ -37,6 +40,7 @@ class DepositAccessToken(Model):
 
     # Connections
     deposit = models.ForeignKey('bank.Deposit', related_name='tokens')
+    user = models.ForeignKey(get_user_model(), related_name='tokens')
 
 
 # Deposit instance
