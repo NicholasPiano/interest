@@ -1,0 +1,13 @@
+
+(date 2017/10/04)
+
+Starting basic savings interest app. Plan is to have users and roles with two models: bank and deposit.
+Interface will follow basic list, single, add, delete component layout.
+User login is decoupled, using tokens for REST.
+
+Two apps:
+1. bank
+
+Contains bank, deposit, deposit instance
+
+2. users

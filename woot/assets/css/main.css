@@ -12,28 +12,28 @@ but not specific #element stylings. These are found in elements.css.
 */
 
 html {
-	font-family: sans-serif;
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
-	background-color: #fafafa;
-	/*background-color: rgba(80, 134, 154, 1);*/
-	color: #888;
-	height: 100%;
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  background-color: #fafafa;
+  /*background-color: rgba(80, 134, 154, 1);*/
+  color: #888;
+  height: 100%;
 }
 
 body {
-	margin: 0;
-	box-sizing: border-box;
-	width: auto;
-	height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  width: auto;
+  height: 100%;
 }
 
 a, a:hover, a:focus, a:active {
-	color: #888;
-	text-decoration: none;
-	font-family: sans-serif;
+  color: #888;
+  text-decoration: none;
+  font-family: sans-serif;
 }
 
 h2, h3 {
-	font-family: sans-serif;
+  font-family: sans-serif;
 }

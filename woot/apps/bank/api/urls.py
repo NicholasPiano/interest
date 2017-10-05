@@ -1,20 +1,20 @@
 
-### Django
+# Django
 from django.conf.urls import include, url
 
-### Local
+# Local
 from apps.bank.api.access import login, access
 
-### Util
+# Util
 
 
-### Urls
+# Urls
 urlpatterns = [
 
-	# login
-	url(r'^login/$', login),
+    # login
+    url(r'^login/$', login),
 
-	# request or update existing data
-	url(r'^a/$', access),
+    # request or update existing data
+    url(r'^a/$', access),
 
 ]

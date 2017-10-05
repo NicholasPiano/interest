@@ -23,76 +23,76 @@ Common interface elements
  */
  /* interface element */
 .ie {
-	position: relative;
-	background-color: transparent;
-	overflow-x: hidden;
-	overflow-y: hidden;
-	box-sizing: border-box;
-	font-size: inherit;
-	line-height: inherit;
-	font-family: monospace;
-	font-style: normal;
-	font-variant: normal;
-	margin: 0px;
+  position: relative;
+  background-color: transparent;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  font-size: inherit;
+  line-height: inherit;
+  font-family: monospace;
+  font-style: normal;
+  font-variant: normal;
+  margin: 0px;
 }
 
 .ie.border {
-	border: 1px solid #ccc;
+  border: 1px solid #ccc;
 }
 
 .ie.border-radius {
-	border-radius: 4px;
+  border-radius: 4px;
 }
 
 .ie.abstract {
-	overflow: visible;
-	position: absolute;
+  overflow: visible;
+  position: absolute;
 }
 
 .ie.hidden {
-	display: none !important;
+  display: none !important;
 }
 
 .ie.abs {
-	position: absolute;
+  position: absolute;
 }
 
 .ie.title {
-	font-size: 22px;
-	margin-bottom: 10px;
+  font-size: 22px;
+  margin-bottom: 10px;
 }
 
 /* Scroll */
 .ie.scroll-wrapper {
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .ie.scroll-wrapper .scroll {
-	height: 100%;
-	width: calc(100% + 20px);
-	overflow-y: scroll;
-	padding-right: 20px;
+  height: 100%;
+  width: calc(100% + 20px);
+  overflow-y: scroll;
+  padding-right: 20px;
 }
 
 /* centred vertically */
 .ie.centred-vertically {
-	top: 50%;
-	transform: translateY(-50%);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* centred horizontally */
 .ie.centred-horizontally {
-	left: 50%;
-	transform: translateX(-50%);
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* centred both */
 .ie.centred {
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /*
@@ -102,27 +102,27 @@ Common interface elements
 */
 /* Sidebar */
 .ie.sidebar {
-	display: block;
-	width: 200px;
-	height: 70%;
+  display: block;
+  width: 200px;
+  height: 70%;
 }
 
 /* Mini sidebar */
 .ie.sidebar.mini {
-	width: 50px;
+  width: 50px;
 }
 
 .ie.loading-icon {
-	height: 25px;
-	width: 25px;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  height: 25px;
+  width: 25px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .ie.loading-icon img {
-	height: 25px;
-	width: 25px;
+  height: 25px;
+  width: 25px;
 }
 
 /*
@@ -133,10 +133,10 @@ Common interface elements
 
 /* Full panel */
 .ie.panel {
-	height: 70%;
-	width: calc(100% - 60px);
-	-webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, .05);
-	box-shadow: 0 0px 0px rgba(0, 0, 0, .05);
+  height: 70%;
+  width: calc(100% - 60px);
+  -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, .05);
+  box-shadow: 0 0px 0px rgba(0, 0, 0, .05);
 }
 
 /*
@@ -145,47 +145,47 @@ Common interface elements
 
 */
 .ie.button {
-	padding-top: 11px;
-	height: 40px;
-	text-align: center;
-	background-image: none;
-	background-color: transparent;
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	text-shadow: none;
-	font-size: 15px;
-	color: #888;
-	cursor: pointer;
-	display: block;
+  padding-top: 11px;
+  height: 40px;
+  text-align: center;
+  background-image: none;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  text-shadow: none;
+  font-size: 15px;
+  color: #888;
+  cursor: pointer;
+  display: block;
 }
 
 .ie.button:hover {
-	border-color: #aaa;
-	background-color: transparent;
+  border-color: #aaa;
+  background-color: transparent;
 }
 
 .ie.button:active {
-	border-color: #fff;
+  border-color: #fff;
 }
 
 .ie.sidebar .ie.button {
-	width: 180px;
+  width: 180px;
 }
 
 .ie.sidebar.mini .ie.button {
-	width: 50px;
+  width: 50px;
 }
 
 .ie.sidebar .ie.button.start-button {
-	height: 80px;
-	padding-top: 25px;
-	font-size: 20px;
+  height: 80px;
+  padding-top: 25px;
+  font-size: 20px;
 }
 
 .ie.sidebar-button {
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 /*
@@ -195,51 +195,51 @@ Common interface elements
 */
 
 .ie.input {
-	box-sizing: border-box;
-	color: #888;
-	height: 40px;
-	padding-top: 11px;
-	padding-left: 10px;
-	cursor: text;
-	font-size: 15px;
+  box-sizing: border-box;
+  color: #888;
+  height: 40px;
+  padding-top: 11px;
+  padding-left: 10px;
+  cursor: text;
+  font-size: 15px;
 }
 
 .ie.input.error {
-	border: 1px solid palevioletred;
-	color: palevioletred;
+  border: 1px solid palevioletred;
+  color: palevioletred;
 }
 
 .ie.input:focus {
-	-webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075), 0 0 0px rgba(102, 175, 233, .6);
-	box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075), 0 0 0px rgba(102, 175, 233, .6);
-	outline: none;
-	color: #888;
+  -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075), 0 0 0px rgba(102, 175, 233, .6);
+  box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075), 0 0 0px rgba(102, 175, 233, .6);
+  outline: none;
+  color: #888;
 }
 
 .ie.input.top {
-	border-bottom-left-radius: 0px;
-	border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .ie.input .head {
-	display: inline-block;
-	position: absolute;
-	min-width: 2px;
-	padding-left: 1px;
+  display: inline-block;
+  position: absolute;
+  min-width: 2px;
+  padding-left: 1px;
 }
 
 .ie.input .head:focus {
-	-webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075), 0 0 0px rgba(102, 175, 233, .6);
-	box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075), 0 0 0px rgba(102, 175, 233, .6);
-	outline: none;
+  -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075), 0 0 0px rgba(102, 175, 233, .6);
+  box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075), 0 0 0px rgba(102, 175, 233, .6);
+  outline: none;
 }
 
 .ie.input .tail {
-	display: inline-block;
-	position: relative;
-	opacity: 0.5;
-	pointer-events: none;
-	padding-left: 1px;
+  display: inline-block;
+  position: relative;
+  opacity: 0.5;
+  pointer-events: none;
+  padding-left: 1px;
 }
 
 /*
@@ -258,7 +258,7 @@ Misc
 */
 
 .glyphicon-hidden {
-	display: none;
+  display: none;
 }
 
 /*
