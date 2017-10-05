@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 # Local
-from apps.base.models import Model, AccessMixin
+from apps.base.models import Model, Manager, AccessMixin
 from apps.base.api import add_tables
 
 
@@ -19,8 +19,23 @@ class Bank(Model):
 
 
 # Deposit
+class DepositManager(Manager):
+    def access(self, user):
+        credentials = {}
+        for token in user.permanent_tokens.all():
+            credentials[token.deposit._id] = {
+                'creator': token.deposit._creator,
+                'admin': token.deposit._admin,
+                'editor': token.deposit._editor,
+                'viewer': token.deposit._viewer,
+            }
+
+        return credentials
+
+
 class Deposit(Model, AccessMixin):
     _label = 'deposit'
+    objects = DepositManager()
 
     # Connections
     bank = models.ForeignKey('bank.Bank', related_name='deposits')
@@ -35,13 +50,13 @@ class Deposit(Model, AccessMixin):
     # Methods
 
 
-# Deposit access token
-class DepositAccessToken(Model):
-    _label = 'depositaccesstoken'
+# Permission tokens
+class DepositPermanentToken(Model):
+    _label = 'depositpermanenttoken'
 
     # Connections
-    deposit = models.ForeignKey('bank.Deposit', related_name='tokens')
-    user = models.ForeignKey(get_user_model(), related_name='tokens')
+    deposit = models.ForeignKey('bank.Deposit', related_name='permanent_tokens')
+    user = models.ForeignKey(get_user_model(), related_name='permanent_tokens', null=True)
 
 
 # Deposit instance
@@ -55,4 +70,4 @@ class DepositInstance(Model):
     balance = models.FloatField(default=0)
 
 
-add_tables(Bank, Deposit, DepositAccessToken, DepositInstance)
+add_tables(Bank, Deposit, DepositInstance, primary=Deposit)

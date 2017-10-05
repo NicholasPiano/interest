@@ -2,8 +2,7 @@
 # Django
 from django.db import models
 from django.db.models import Q
-
-# Local
+from django.contrib.auth import get_user_model
 
 # Util
 import uuid
@@ -21,20 +20,9 @@ def is_valid_uuid(uuid_string):
     return str(val) == uuid_string or val.hex == uuid_string or val == uuid_string
 
 
-# Queryset
-class QuerySet(models.QuerySet):
-
-    # returns a loaded list, not a queryset
-    def filter_by_permissions(self, token, **permissions):
-        return list(filter(lambda obj: obj.check_permissions(**permissions), [obj.add_permissions(token) for obj in self.all()]))
-
-
 # Manager
 class Manager(models.Manager):
     use_for_related_fields = True
-
-    def get_queryset(self):
-        return QuerySet(model=self.model)
 
     def filter(self, token=None, secure=False, **kwargs):
 
@@ -142,3 +130,59 @@ class AccessMixin(models.Model):
     @property
     def _viewer(self):
         return self.viewer.hex
+
+
+# Access token
+class AccessTokenManager(Manager):
+    use_for_related_fields = True
+
+    def authenticate(self, user=None, access=None):
+        access = user.access() if access is None and user is not None else access
+        token = self.create(user=user)
+        token.authenticate(access)
+        return token
+
+
+class AccessToken(Model):
+    objects = AccessTokenManager()
+
+    # Connections
+    user = models.ForeignKey(get_user_model(), related_name='access_tokens', null=True)
+
+    # Properties
+    machine = models.TextField(default='')
+    is_active = models.BooleanField(default=False)
+
+    # Methods
+    def deactivate(self):
+        self.is_active = False
+        self.save()
+
+    def authenticate(self, primary, access):
+        self.is_active = True
+        for key, credentials in access.items():
+            self.add(primary, key, credentials)
+        self.save()
+
+    def add(self, primary, key, credentials):
+        if primary.objects.filter(key):
+            primary_object = primary.objects.get(id=key)
+            temporary_token, temporary_token_created = self.temporary_tokens.create(_primary=primary_object.id)
+            for category, category_id in credentials.items():
+                if hasattr(primary_object, category) and getattr(primary_object, '_{}'.format(category)) == category_id:
+                    setattr(temporary_token, category, True)
+
+            temporary_token.save()
+
+
+class TemporaryToken(Model):
+
+    # Connections
+    access = models.ForeignKey('base.AccessToken', related_name='temporary_tokens')
+    _primary = models.UUIDField(default=uuid.uuid4, editable=False)
+
+    # Properties
+    creator = models.BooleanField(default=False)
+    admin = models.BooleanField(default=False)
+    editor = models.BooleanField(default=False)
+    viewer = models.BooleanField(default=False)

@@ -222,6 +222,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
+    'apps.base',
     'apps.bank',
     'apps.users',
 )
