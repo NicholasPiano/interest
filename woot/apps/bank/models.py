@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 
 # Local
 from apps.base.models import Model, AccessMixin
+from apps.base.api import add_tables
 
 
 # Bank
@@ -52,3 +53,6 @@ class DepositInstance(Model):
 
     # Properties
     balance = models.FloatField(default=0)
+
+
+add_tables(Bank, Deposit, DepositAccessToken, DepositInstance)

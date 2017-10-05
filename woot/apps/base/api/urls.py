@@ -1,9 +1,9 @@
 
 # Django
-from django.conf.urls import include, url
+from django.conf.urls import url
 
 # Local
-from apps.bank.api.access import login, access
+from apps.base.api.access import login, access
 
 # Util
 
