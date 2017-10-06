@@ -4,7 +4,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
 # Local
-from apps.base.models import AccessToken
+from apps.bank.models.permission import AccessToken
+from apps.bank.models.bank import Bank, Deposit, DepositInstance
+from apps.bank.models.users import User
 
 # Util
 import json
@@ -13,7 +15,7 @@ import json
 
 
 # Unpack
-def authenticate(request):
+def extract_token(request):
     body = json.loads(request.body.decode('utf-8'))
     token = AccessToken.objects.get(id=body.get('token') or '')
     return token, body
@@ -32,20 +34,15 @@ class Access():
 
 
 def unpack(request):
-    token, body = authenticate(request)
+    token, body = extract_token(request)
     return Access(token, body)
 
 
 # API
-primary = None
-tables = {}
-
-
-def add_tables(*new_tables, primary=None):
-    primary = primary
+tables = {t._label: t for t in [User, Bank, Deposit, DepositInstance]}
+def register(*new_tables):
     for new_table in new_tables:
         tables[new_table._label] = new_table
-
 
 # Login
 @csrf_exempt
@@ -53,9 +50,8 @@ def login(request):
     # create access token
     if request.method == 'POST':
         body = request.body.decode('utf-8')
-        credentials = json.loads(body) if body else primary.objects.access(request.user)
-        token = AccessToken.objects.create()
-        token.authenticate(primary, credentials)
+        credentials = json.loads(body) if body else request.user.access()
+        token = AccessToken.objects.authenticate(credentials)
         return JsonResponse({'token': token._id})
 
 

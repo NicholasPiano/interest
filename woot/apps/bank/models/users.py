@@ -8,7 +8,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 # Local
-from apps.base.models import Model
+from apps.bank.models.base import Model
 
 # Util
 import uuid
@@ -57,10 +57,16 @@ class User(AbstractBaseUser, PermissionsMixin, Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
 
+    # roles
+    is_user = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    is_manager = models.BooleanField(default=False)
+
     # activation
     is_activated = models.BooleanField(default=False)
     activation_email_sent = models.BooleanField(default=False)
     activation_key = models.UUIDField(default=uuid.uuid4)
+    submitted_activation_key = models.UUIDField(default=uuid.uuid4)
     activation_email_key = models.CharField(max_length=8, default=random_key)
 
     # enabled status on system: is deleted?
@@ -87,6 +93,3 @@ class User(AbstractBaseUser, PermissionsMixin, Model):
         self.is_activated = activation_key == self.activation_key.hex if activation_key is not None else self.is_activated
         self.save()
         return self.is_activated
-
-    def access(self):
-        pass

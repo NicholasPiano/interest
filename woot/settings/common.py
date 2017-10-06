@@ -19,7 +19,7 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 
 ########## AUTH CONFIGURATION
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'bank.User'
 ########## END AUTH CONFIGURATION
 
 
@@ -222,9 +222,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-    'apps.base',
     'apps.bank',
-    'apps.users',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
