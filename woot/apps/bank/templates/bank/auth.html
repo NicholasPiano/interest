@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} Authentication {% endblock %}
+{% block js %}
+<!-- specific UI -->
+<script src="{% static 'bank/js/auth/interfaces/auth.interfaces.activation.js' %}"></script>
+<script src="{% static 'bank/js/auth/interfaces/auth.interfaces.login.js' %}"></script>
+
+<script src="{% static 'bank/js/auth/components/auth.components.roles.main.js' %}"></script>
+<script src="{% static 'bank/js/auth/components/auth.components.roles.button.js' %}"></script>
+<script src="{% static 'bank/js/auth/interfaces/auth.interfaces.signup.js' %}"></script>
+<script src="{% static 'bank/js/auth/auth.application.js' %}"></script>
+<script src="{% static 'bank/js/auth/auth.js' %}"></script>
+{% endblock %}

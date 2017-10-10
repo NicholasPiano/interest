@@ -18,14 +18,18 @@ class AccessTokenManager(Manager):
 
     def authenticate(self, user=None, access=None):
 
-        # deactivate all previous tokens
-        for token in self.filter(user=user, is_active=True):
-            token.deactivate()
+        if hasattr(user, 'access'):
+            # deactivate all previous tokens
+            for token in self.filter(user=user, is_active=True):
+                token.deactivate()
 
-        # create and return new token
-        access = user.access() if access is None and user is not None else access
+            # create and return new token
+            access = user.access() if access is None and user is not None else access
+        else:
+            user = None
+
         token = self.create(user=user)
-        token.authenticate(access)
+        token.authenticate(access or {})
         return token
 
 

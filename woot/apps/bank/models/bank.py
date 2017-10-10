@@ -23,6 +23,16 @@ class Bank(Model):
     # Properties
     name = models.CharField(max_length=255)
 
+    # Methods
+    def data(self, token=None, secure=False, parameter=None, methods=[]):
+        self.parameter = parameter
+        self.methods = methods
+        return {
+            key: value for d in [
+                # Properties
+                self._parameter('name'),
+            ] for key, value in d.items()
+        }
 
 # Deposit
 class DepositManager(Manager):
@@ -44,7 +54,22 @@ class Deposit(Model):
     end_date = models.DateTimeField(auto_now_add=False, null=True)
 
     # Methods
+    def data(self, token=None, secure=False, parameter=None, methods=[]):
+        self.parameter = parameter
+        self.methods = methods
+        return {
+            key: value for d in [
+                # Connections
+                self._parameter('bank'),
 
+                # Properties
+                self._parameter('account_number'),
+                self._parameter('yearly_interest'),
+                self._parameter('tax'),
+                self._parameter('start_date'),
+                self._parameter('end_date'),
+            ] for key, value in d.items()
+        }
 
 # Deposit instance
 class DepositInstanceManager(Manager):
@@ -59,3 +84,17 @@ class DepositInstance(Model):
 
     # Properties
     balance = models.FloatField(default=0)
+
+    # Methods
+    def data(self, token=None, secure=False, parameter=None, methods=[]):
+        self.parameter = parameter
+        self.methods = methods
+        return {
+            key: value for d in [
+                # Connections
+                self._parameter('deposit'),
+
+                # Properties
+                self._parameter('balance'),
+            ] for key, value in d.items()
+        }

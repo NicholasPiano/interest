@@ -2,9 +2,10 @@
 {% load staticfiles %}
 {% block title %} Account {% endblock %}
 {% block js %}
-
-<!-- Account -->
-<script src="{% static 'bank/js/account.application.js' %}"></script>
-<script src="{% static 'bank/js/account.js' %}"></script>
-
+<!-- specific UI -->
+<!-- <script src="{% static 'bank/js/account/interfaces/account.interfaces.activation.js' %}"></script> -->
+<!-- <script src="{% static 'bank/js/account/interfaces/account.interfaces.login.js' %}"></script> -->
+<!-- <script src="{% static 'bank/js/account/interfaces/account.interfaces.signup.js' %}"></script> -->
+<script src="{% static 'bank/js/account/account.application.js' %}"></script>
+<script src="{% static 'bank/js/account/account.js' %}"></script>
 {% endblock %}

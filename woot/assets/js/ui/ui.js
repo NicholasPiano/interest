@@ -741,13 +741,19 @@ var Context = {
 
   getToken: function () {
     if (Context.token === undefined) {
-      return Request('/account/token/').then(function (result) {
+      return Request('/token/').then(function (result) {
         Context.token = result.token;
         return Context.token;
       });
     } else {
       return Util.ep(Context.token);
     }
+  },
+
+  getUser: function () {
+    return Context.getToken().then(function (token) {
+      return Context.get('user', {options: {data: {kwargs: {'access_tokens__id': token}}}});
+    });
   },
 
   permit: function (data) {
@@ -844,11 +850,11 @@ var Context = {
     return Context.permit({
       path: path,
       kwargs: (data.kwargs || {}),
-      permissions: (data.permissions || {}),
       query: data.query,
       methods: (data.methods || {}),
       limit: data.limit,
       count: (data.count || false),
+      create: (data.create || {}),
     }).then(function (request) {
       if (typeof path !== 'string') {
         return path().then(function (calculatedPath) {

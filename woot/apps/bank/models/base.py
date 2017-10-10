@@ -88,10 +88,13 @@ class Model(models.Model):
     def _ref(self):
         return '{}.{}'.format(self.__class__._label, self._id)
 
+    def __unicode__(self):
+        return self._ref
+
     def _parameter(self, name, value=None):
         # If the request loading the object specifies a filter keyword to access a single property, make sure it matches this property name
         # Else, let it through.
-        if self.parameter is None or (self.parameter is not None and self.name == self.parameter):
+        if self.parameter is None or (self.parameter is not None and name == self.parameter):
             return {name: value if value is not None else (getattr(self, name) if hasattr(self, name) else None)}
         return {}
 

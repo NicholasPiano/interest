@@ -50,8 +50,7 @@ def login(request):
     # create access token
     if request.method == 'POST':
         body = request.body.decode('utf-8')
-        credentials = json.loads(body) if body else request.user.access()
-        token = AccessToken.objects.authenticate(credentials)
+        token = AccessToken.objects.authenticate(user=request.user, access=json.loads(body or '{}'))
         return JsonResponse({'token': token._id})
 
 
@@ -62,6 +61,7 @@ def access(request):
         # process path
         path = access.path.split('.')
         table, _id, parameter = tuple(path + [''] * (3 - len(path)))
+        parameter = None if parameter == '' else parameter
 
         # data
         if table in tables.keys():
@@ -82,7 +82,8 @@ def access(request):
 
             # if not found, create
             if queryset.count() == 0 and access.create:
-                queryset = [table.objects.create(token=access.token, secure=True, **access.create)]
+                table_object, table_object_created = table.objects.create(**access.create)
+                queryset = [table_object]
 
             # truncate
             queryset = queryset[0:access.limit] if access.limit is not None else queryset
